@@ -1,5 +1,6 @@
 package bilpoint;
 
+
 public abstract class Minigame {
 protected String challengerId;
 protected String gameId;
@@ -9,5 +10,12 @@ public Minigame(String gameId, String challengerId){
 }
     
 public abstract void play();
+
 public abstract String getWinner();
+
 }
+
+
+
+
+
