@@ -1,13 +1,13 @@
 package bilpoint;
 
 public abstract class Minigame {
-private String challengerId;
-private String gameId;
-public Minigame(String gameId, String challngerId){
- this.challengerId = challngerId;
+protected String challengerId;
+protected String gameId;
+public Minigame(String gameId, String challengerId){
+ this.challengerId = challengerId;
  this.gameId = gameId;
 }
     
 public abstract void play();
-public abstract void getWinner();
+public abstract String getWinner();
 }
