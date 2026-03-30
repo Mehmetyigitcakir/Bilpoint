@@ -56,4 +56,5 @@ public class CoinFlip extends Minigame {
             headsSelector = false;
         }
     }
+    public void flip(){}
 }

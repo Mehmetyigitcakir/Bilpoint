@@ -3,6 +3,7 @@ package bilpoint;
 public class RockPaperScissors extends Minigame {
 
     private String opponentId;
+<<<<<<< Updated upstream
     private int move1;
     private int move2;
     private String winner;
@@ -39,5 +40,12 @@ public class RockPaperScissors extends Minigame {
     @Override
     public String getWinner() {
         return winner;
+=======
+    public RockPaperScissors(String gameId, String challengerId, String opponentId){
+     super(gameId, challengerId);
+     this.opponentId = opponentId;
+>>>>>>> Stashed changes
     }
+
+    public void evaluateWinner(){}
 }
