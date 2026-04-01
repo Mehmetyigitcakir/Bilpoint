@@ -16,14 +16,13 @@ public class CreateEventForm extends JDialog {
         this.coordY = y;
         this.parentMap = parentMap;
 
-        // 1. Form Ayarları (Modern ve Modal)
         setTitle("Create New Meetup");
-        setModal(true); // Form kapanmadan haritaya tıklanamasın
+        setModal(true); 
         setSize(400, 450);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        // 2. Başlık Paneli
+        
         JPanel header = new JPanel();
         header.setBackground(new Color(25, 42, 86));
         JLabel headerLabel = new JLabel("Event Details at (" + x + ", " + y + ")");
@@ -31,17 +30,17 @@ public class CreateEventForm extends JDialog {
         headerLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
         header.add(headerLabel);
 
-        // 3. Giriş Alanları (Grid Layout)
+    
         JPanel inputPanel = new JPanel(new GridLayout(6, 1, 10, 10));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
 
         titleField = new JTextField();
-        locationNameField = new JTextField(); // Kullanıcının manuel gireceği isim (Örn: Speed Cafe)
+        locationNameField = new JTextField(); 
         
-        // Kota seçimi (Min: 2, Max: 100)
+        
         quotaSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 100, 1));
         
-        // Etkinlik Türü (Raporundaki Katmanlar)
+        
         String[] types = {"Private (Friends Only)", "Public (Global)"};
         typeBox = new JComboBox<>(types);
 
@@ -54,11 +53,11 @@ public class CreateEventForm extends JDialog {
         inputPanel.add(new JLabel("Event Type:"));
         inputPanel.add(typeBox);
 
-        // 4. Butonlar
+        
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton cancelBtn = new JButton("Cancel");
         JButton createBtn = new JButton("Create & Pin");
-        createBtn.setBackground(new Color(46, 204, 113)); // Yeşil "Swiss vibe"
+        createBtn.setBackground(new Color(46, 204, 113)); 
         createBtn.setForeground(Color.WHITE);
 
         createBtn.addActionListener(e -> handleCreate());
@@ -83,9 +82,9 @@ public class CreateEventForm extends JDialog {
             return;
         }
 
-        // Yiğit'in logic kısmına bağlanacak yer burası!
-        // Şimdilik sadece haritaya pini ekleyelim
-        // parentMap.addPin(new MapPin(coordX, coordY, title, isPrivate));
+        
+        
+        
         
         System.out.println("Event Created: " + title + " at " + location + " (" + coordX + "," + coordY + ")");
         dispose();

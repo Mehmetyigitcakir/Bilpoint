@@ -13,11 +13,11 @@ public class MapPin {
     }
 
     public boolean isClicked(int mouseX, int mouseY) {
-        // Tıklanan alanın iğneye yakınlığını kontrol eder
+        
         return Math.abs(x - mouseX) < 20 && Math.abs(y - mouseY) < 20;
     }
 
-    // Getter metodları
+    
     public int getX() { return x; }
     public int getY() { return y; }
     public String getTitle() { return title; }
