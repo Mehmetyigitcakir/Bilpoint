@@ -14,20 +14,6 @@ public class Student extends User {
         friends = new ArrayList<Student>();
     }
 
-    @Override
-    public boolean login(String m, String p) {
-        if (m.equals(mail) && p.equals(password)) {
-            this.isLoggedIn = true;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void logout() {
-        this.isLoggedIn = false;
-    }
-
     public void sendFriendRequest(Student s) {
         if (s == null|| s.equals(this))
             return;
