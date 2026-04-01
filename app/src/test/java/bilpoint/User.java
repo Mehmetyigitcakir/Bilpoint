@@ -1,4 +1,5 @@
 package bilpoint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,21 +20,35 @@ public abstract class User {
         isLoggedIn = false;
         this.notifications = new ArrayList<>();
     }
-    public abstract void logout();
-    public abstract boolean login(String m, String p);
+
+    public boolean login(String m, String p) {
+        if (m.equals(mail) && p.equals(password)) {
+            this.isLoggedIn = true;
+            return true;
+        }
+        return false;
+    }
+
+    public void logout() {
+        this.isLoggedIn = false;
+    }
 
     public String getID() {
         return ID;
     }
+
     public String getMail() {
         return mail;
     }
+
     public String getName() {
         return name;
     }
+
     public String getPassword() {
         return password;
     }
+
     public List<Notification> getNotifications() {
         return notifications;
     }
