@@ -5,8 +5,9 @@ public class ClubAdmin extends User {
  private String clubName;
  private String activationCode;
 
-  public ClubAdmin(String name, String ID, String mail, String password, String clubName, String activationCode){
-    super(clubName, ID, mail, password); 
+  public ClubAdmin(String name, String mail, String password, String clubName, String activationCode){
+    super(clubName, mail, password); 
+    ID = "ADM-" + java.util.UUID.randomUUID().toString().substring(0, 8); 
     this.clubName = clubName;
   }
   public String getClubName() {
@@ -23,7 +24,7 @@ public class ClubAdmin extends User {
     SystemController.getInstance().addEvent(newEvent);
     return true;
    }
-   public void removeClubEvent(Event event ){
+   public void removeClubEvent(Event event){
     if (event == null){
         
     }

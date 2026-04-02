@@ -8,8 +8,9 @@ public class Student extends User {
     private String department;
     private List<Student> friends;
 
-    public Student(String name, String ID, String mail, String password, String department) {
-        super(name, ID, mail, password);
+    public Student(String name, String mail, String password, String department) {
+        super(name, mail, password);
+        this.ID = "STD-" + java.util.UUID.randomUUID().toString().substring(0, 8);
         this.department = department;
         friends = new ArrayList<Student>();
     }
@@ -29,7 +30,6 @@ public class Student extends User {
     }
     public void joinEvent(Event event) {
         
-
     }
 
     public String getDepartment() {

@@ -12,9 +12,9 @@ public abstract class User {
     protected String password;
     protected List<Notification> notifications;
 
-    public User(String name, String ID, String mail, String password) {
+    public User(String name, String mail, String password) {
         this.name = name;
-        this.ID = ID;
+        this.ID = "USR-" + java.util.UUID.randomUUID().toString().substring(0, 8);
         this.mail = mail;
         this.password = password;
         isLoggedIn = false;

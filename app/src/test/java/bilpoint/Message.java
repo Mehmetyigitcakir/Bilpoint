@@ -7,11 +7,11 @@ public class Message {
     private String content;
     private long timestamp;
 
-    public Message(String msgID, String senderID, String content, long timestamp) {
+    public Message(String senderID, String content) {
         this.content = content;
         this.senderID = senderID;
-        this.msgID = msgID;
-        this.timestamp = timestamp;
+        this.msgID = "MSG-" + java.util.UUID.randomUUID().toString().substring(0, 8);
+        this.timestamp = System.currentTimeMillis();
 
     }
     public String getContent() {
@@ -25,6 +25,9 @@ public class Message {
     }
     public long getTimestamp() {
         return timestamp;
+    }
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }
