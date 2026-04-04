@@ -6,10 +6,10 @@ public abstract class Minigame {
     protected String challengerId;    
     protected String status; // Playing, Finished, Pending
 
-    public Minigame(String gameId, String challengerId){
-        this.gameId = gameId;
+    public Minigame(String challengerId){
+        this.gameId = "GM-" + java.util.UUID.randomUUID().toString();
         this.challengerId = challengerId;
-        this.status = "PENDING";
+        this.status = "Pending";
     }
 
     public void play(){}
