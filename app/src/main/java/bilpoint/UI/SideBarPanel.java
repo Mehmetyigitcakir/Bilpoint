@@ -1,7 +1,19 @@
-package bilpoint.ui;
 
-import javax.swing.*;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class SideBarPanel extends JPanel {
     private MainFrame parent;
@@ -55,6 +67,8 @@ public class SideBarPanel extends JPanel {
 
         
         mapBtn.addActionListener(e -> parent.switchView("MAP_VIEW"));
+        friendsBtn.addActionListener(e -> parent.switchView("FRIENDS_GROUPS_VIEW"));
+        inboxBtn.addActionListener(e -> parent.switchView("NOTIFICATION_POOL_VIEW"));
 
         navPanel.add(mapBtn);
         navPanel.add(friendsBtn);

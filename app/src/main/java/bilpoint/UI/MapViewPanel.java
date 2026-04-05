@@ -1,9 +1,17 @@
-package bilpoint.ui;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class MapViewPanel extends JPanel {
     private Image mapImage;
@@ -13,9 +21,9 @@ public class MapViewPanel extends JPanel {
 
     public MapViewPanel() {
         
-        mapImage = new ImageIcon("assets_bilpoint/map.png").getImage();
-        redPin = new ImageIcon("assets_bilpoint/red-pin.png").getImage();
-        greenPin = new ImageIcon("assets_bilpoint/green-pin.png").getImage();
+        mapImage = new ImageIcon("map.png").getImage();
+        redPin = new ImageIcon("red-pin.png").getImage();
+        greenPin = new ImageIcon("green-pin.png").getImage();
         
         activePins = new ArrayList<>();
 

@@ -1,4 +1,4 @@
-package bilpoint.ui;
+
 
 import javax.swing.*;
 import java.awt.*;

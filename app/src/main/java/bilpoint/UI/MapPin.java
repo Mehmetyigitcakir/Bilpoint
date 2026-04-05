@@ -1,4 +1,4 @@
-package bilpoint.ui;
+
 
 public class MapPin {
     private int x, y;

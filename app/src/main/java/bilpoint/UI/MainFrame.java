@@ -1,13 +1,21 @@
-package bilpoint.ui;
 
-import javax.swing.*;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+
 
 public class MainFrame extends JFrame {
     private CardLayout cardLayout; 
     private JPanel contentArea;
     private SideBarPanel sidebar;
     private MapViewPanel mapView;
+    private FriendsGroupsPanel friendsGroupsPanel;
+    private NotificationPoolPanel notificationPoolPanel;
 
     public MainFrame() {
         
@@ -24,9 +32,13 @@ public class MainFrame extends JFrame {
         
         sidebar = new SideBarPanel(this);
         mapView = new MapViewPanel();
+        friendsGroupsPanel = new FriendsGroupsPanel();
+        notificationPoolPanel = new NotificationPoolPanel();
 
         
         contentArea.add(mapView, "MAP_VIEW");
+        contentArea.add(friendsGroupsPanel, "FRIENDS_GROUPS_VIEW");
+        contentArea.add(notificationPoolPanel, "NOTIFICATION_POOL_VIEW");
 
         
         add(sidebar, BorderLayout.WEST);
