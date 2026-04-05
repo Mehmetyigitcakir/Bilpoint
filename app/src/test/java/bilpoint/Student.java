@@ -24,12 +24,10 @@ public class Student extends User {
 
     public void acceptFriend(Student friend){
        if (!friends.contains(friend)) {
+         friend.getNotifications().add(new Notification(this.name + " has accepted your friend request."))
             this.friends.add(friend);
             friend.getFriends().add(this); 
         } 
-    }
-    public void joinEvent(Event event) {
-        
     }
 
     public String getDepartment() {

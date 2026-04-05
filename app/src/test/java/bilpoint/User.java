@@ -11,6 +11,7 @@ public abstract class User {
     protected boolean isLoggedIn;
     protected String password;
     protected List<Notification> notifications;
+    protected List<Event> joinedEvents;
 
     public User(String name, String mail, String password) {
         this.name = name;
@@ -19,6 +20,7 @@ public abstract class User {
         this.password = password;
         isLoggedIn = false;
         this.notifications = new ArrayList<>();
+        this.joinedEvents = new ArrayList<>();
     }
 
     public boolean login(String m, String p) {
@@ -27,6 +29,11 @@ public abstract class User {
             return true;
         }
         return false;
+    }
+
+    public void joinEvent(Event event) {
+        joinedEvents.add(event);
+        event.getUserList().add(this);
     }
 
     public void logout() {

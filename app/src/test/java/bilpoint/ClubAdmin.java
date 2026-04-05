@@ -16,11 +16,11 @@ public class ClubAdmin extends User {
   public String getActivationCode() {
       return activationCode;
   }
-   public boolean  createClubEvent(String title, String location, String date ){
+   public boolean  createClubEvent(String title, String location, String date){
     if (isLoggedIn == false)
         return false;
 
-    Event newEvent = new PublicEvent(title,  location, date, this.clubName);
+    Event newEvent = new PublicEvent(this, title, location, 1, date);
     SystemController.getInstance().addEvent(newEvent);
     return true;
    }

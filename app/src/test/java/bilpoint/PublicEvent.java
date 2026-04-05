@@ -1,15 +1,16 @@
 package bilpoint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PublicEvent extends Event {
     protected int participantCount;
-    protected ArrayList<String> adminCount;
+    protected List<String> adminCount;
 
-    public PublicEvent(String eventId, String hostId, String title, String location, int participantCount) {
-        super(eventId, hostId, title, location);
+    public PublicEvent(User host, String title, String location, int participantCount, String date) {
+        super(host, title, location, date);
         this.participantCount = participantCount;
-        //TODO Auto-generated constructor stub
+        adminCount = new ArrayList<>();
     }
 
     public void incrementParticipantCount(){
