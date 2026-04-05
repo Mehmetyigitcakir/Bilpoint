@@ -12,10 +12,15 @@ public class PrivateMeetup extends Event{
     }
 
     public boolean checkQuota(){
+        if(this.quota >= this.invitedId.size()){
+            return true;
+        }
+        else
         return false;
         //
     }
-    public void kickMember(){
+    public void kickMember(User user){
+        super.userList.remove(user);
         //
     }
     
