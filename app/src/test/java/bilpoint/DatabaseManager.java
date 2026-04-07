@@ -7,8 +7,6 @@ import java.sql.SQLException;
 public class DatabaseManager {
     private static DatabaseManager instance;
     private Connection connection;
-
-    // XAMPP veritabanı ayarların
     private final String URL = "jdbc:mysql://localhost:3306/bilpoint_db";
     private final String USER = "root";
     private final String PASS = "";
