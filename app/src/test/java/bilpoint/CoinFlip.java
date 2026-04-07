@@ -18,12 +18,12 @@ public class CoinFlip extends Minigame {
 
     @Override
     public void play() {
-        flip();
+        this.headsSelector = random.nextBoolean();
     }
 
     @Override
     public String getWinner() {
-        if(headsSelector){
+        if(headsSelector == true){
             return optionOne;
         }
         else{
@@ -31,8 +31,8 @@ public class CoinFlip extends Minigame {
         }
     }
 
-    public void flip(){
-        this.headsSelector = random.nextBoolean();
-    }
+    //public void flip(){
+        //this.headsSelector = random.nextBoolean();
+    //}
     
 }
