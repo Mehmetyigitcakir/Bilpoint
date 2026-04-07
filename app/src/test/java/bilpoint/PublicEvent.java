@@ -17,5 +17,13 @@ public class PublicEvent extends Event {
         this.participantCount++;
     }
 
+    public int getParticipantCount() {
+        return participantCount;
+    }
+
+    public List<String> getAdminCount() {
+        return adminCount;
+    }
+
     
 }

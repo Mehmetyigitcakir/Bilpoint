@@ -39,6 +39,14 @@ public class PrivateMeetup extends Event{
          return false;
         }
     }
+
+    public int getQuota() {
+        return quota;
+    }
+
+    public List<User> getInvitedUsers() {
+        return invitedUsers;
+    }
     
     
 }

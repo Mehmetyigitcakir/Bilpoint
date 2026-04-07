@@ -44,4 +44,23 @@ public abstract class Event{
     public String getTitle() {
         return title;
     }
+    public String getEventId() {
+        return eventId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public ChatSession getChatSession() {
+        return chatSession;
+    }
+
+    public boolean isCancelled() {
+        return isCancelled;
+    }
 }
