@@ -38,4 +38,10 @@ public abstract class Event{
     public List<User> getUserList() {
         return userList;
     }
+    public User getHost() {
+        return host;
+    }
+    public String getTitle() {
+        return title;
+    }
 }

@@ -24,7 +24,7 @@ public class RockPaperScissors extends Minigame {
         setStatus("Playing");
         if (move1 == 0 && move2 == 2) {
             winner += challengerId;
-        } else if (move2 == 0 && move1 == 2)
+        }else if (move2 == 0 && move1 == 2)
             winner += opponentId;
         else if (move1 > move2) {
             winner += challengerId;

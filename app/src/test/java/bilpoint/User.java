@@ -41,7 +41,9 @@ public abstract class User {
     public void logout() {
         this.isLoggedIn = false;
     }
-
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
     public String getID() {
         return ID;
     }
