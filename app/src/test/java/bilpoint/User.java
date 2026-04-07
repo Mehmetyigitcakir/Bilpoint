@@ -8,6 +8,7 @@ public abstract class User {
     protected String name;
     protected String ID;
     protected String mail;
+    protected String location;
     protected boolean isLoggedIn;
     protected String password;
     protected List<Notification> notifications;
@@ -15,6 +16,7 @@ public abstract class User {
 
     public User(String name, String mail, String password) {
         this.name = name;
+        this.location = "";
         this.ID = "USR-" + java.util.UUID.randomUUID().toString().substring(0, 8);
         this.mail = mail;
         this.password = password;
@@ -55,7 +57,12 @@ public abstract class User {
     public String getPassword() {
         return password;
     }
-
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    public String getLocation() {
+        return location;
+    }
     public List<Notification> getNotifications() {
         return notifications;
     }
