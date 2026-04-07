@@ -1,4 +1,4 @@
-
+package bilpoint;
 
 import javax.swing.SwingUtilities;
 

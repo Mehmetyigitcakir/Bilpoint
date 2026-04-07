@@ -16,7 +16,7 @@ public class ClubAdmin extends User {
   public String getActivationCode() {
       return activationCode;
   }
-   public boolean  createClubEvent(String title, String location, String date){
+   public boolean createClubEvent(String title, String location, String date){
     if (isLoggedIn == false)
         return false;
 

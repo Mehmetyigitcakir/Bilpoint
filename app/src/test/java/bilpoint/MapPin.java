@@ -1,4 +1,4 @@
-
+package bilpoint;
 
 public class MapPin {
     private int x, y;
