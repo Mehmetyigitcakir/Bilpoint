@@ -57,21 +57,18 @@ public class SystemController {
         this.events.add(new PublicEvent(admin, "Concert", "Center Campus", 60, "02.03.2026"));
     }
 
-    public void removeEvent(User requester, Event event) {
+    public boolean removeEvent(User requester, Event event) {
         if (requester.isLoggedIn() &&
                 requester instanceof ClubAdmin &&
                 event.getHost().getID().equals(requester.getID())) {
 
-            // KONTROL BAŞARILI: Etkinliği sistem listesinden siliyoruz
             if (events.contains(event)) {
                 events.remove(event);
-                System.out.println(
-                        "[System] Event '" + event.getTitle() + "' successfully removed by " + requester.getName());
+                return true;
             }
-        } else {
-            // KONTROL BAŞARISIZ: Yetkisiz işlem uyarısı
-            System.out.println(
-                    "[Access Denied] User " + requester.getName() + " is not authorized to remove this event.");
+            return false;
+          } else {     
+            return false;
         }
     }
 }
