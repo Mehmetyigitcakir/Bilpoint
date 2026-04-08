@@ -11,11 +11,13 @@ public abstract class User {
     protected String location;
     protected boolean isLoggedIn;
     protected String password;
+    protected String department;
     protected List<Notification> notifications;
     protected List<Event> joinedEvents;
 
-    public User(String name, String mail, String password) {
+    public User(String name, String mail, String password, String department) {
         this.name = name;
+        this.department = department;
         this.location = "";
         this.ID = "USR-" + java.util.UUID.randomUUID().toString().substring(0, 8);
         this.mail = mail;
@@ -36,6 +38,9 @@ public abstract class User {
     public void joinEvent(Event event) {
         joinedEvents.add(event);
         event.getUserList().add(this);
+    }
+    public String getDepartment() {
+        return department;
     }
 
     public void logout() {

@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
-
 public class MainFrame extends JFrame {
     private CardLayout cardLayout; 
     private JPanel contentArea;
@@ -16,9 +15,10 @@ public class MainFrame extends JFrame {
     private MapViewPanel mapView;
     private FriendsGroupsPanel friendsGroupsPanel;
     private NotificationPoolPanel notificationPoolPanel;
+    private User currentUser;
 
-    public MainFrame() {
-        
+    public MainFrame(User user) {
+        this.currentUser = user;
         setTitle("BilPoint - Campus Network");
         setSize(1280, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,8 +30,8 @@ public class MainFrame extends JFrame {
         contentArea = new JPanel(cardLayout);
         
         
-        sidebar = new SideBarPanel(this);
-        mapView = new MapViewPanel();
+        sidebar = new SideBarPanel(this, user);
+        mapView = new MapViewPanel(user, this);
         friendsGroupsPanel = new FriendsGroupsPanel();
         notificationPoolPanel = new NotificationPoolPanel();
 
@@ -43,17 +43,25 @@ public class MainFrame extends JFrame {
         
         add(sidebar, BorderLayout.WEST);
         add(contentArea, BorderLayout.CENTER);
+        pack();
+        setVisible(true);
+    }
+    public void switchToChat(Event event) {
+        ChatPanel chatPanel = new ChatPanel(event.getChatSession(), currentUser, event, this);
+        contentArea.add(chatPanel, "CHAT_VIEW");
+        cardLayout.show(contentArea, "CHAT_VIEW");
     }
 
-    
+    public void switchToMap() {
+        cardLayout.show(contentArea, "MAP_VIEW");
+    }
+
+
     public void switchView(String viewName) {
         cardLayout.show(contentArea, viewName);
     }
-
-    public static void main(String[] args) {
-        
-        SwingUtilities.invokeLater(() -> {
-            new MainFrame().setVisible(true);
-        });
+    public User getCurrentUser() {
+        return currentUser;
     }
+        
 }

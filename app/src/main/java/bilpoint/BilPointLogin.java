@@ -29,6 +29,8 @@ private JPasswordField passField;
 private JToggleButton  adminToggle;
 private JButton        signInBtn;
 
+private JButton signInTab;    
+private JButton registerTab; 
 
 private JTextField     regNameField;
 private JTextField     regEmailField;
@@ -66,7 +68,7 @@ private JPanel buildLeftPanel() {
             g2.dispose();
         }
     };
-    panel.setPreferredSize(new Dimension(270, 500));
+    panel.setPreferredSize(new Dimension(300, 600));
     panel.setLayout(new BorderLayout());
     panel.setBorder(new EmptyBorder(44, 30, 28, 30));
 
@@ -107,8 +109,8 @@ private JPanel buildRightPanel() {
     panel.setBorder(new EmptyBorder(32, 42, 32, 42));
 
   
-    JButton signInTab   = new JButton("Sign In");
-    JButton registerTab = new JButton("Create Account");
+     signInTab   = new JButton("Sign In");
+     registerTab = new JButton("Create Account");
     styleTab(signInTab, true);
     styleTab(registerTab, false);
 
@@ -167,47 +169,6 @@ private JPanel buildSignInPanel() {
     sub.setAlignmentX(LEFT_ALIGNMENT);
 
 
-    JPanel toggleRow = new JPanel(new BorderLayout());
-    toggleRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 54));
-    toggleRow.setBackground(WHITE);
-    toggleRow.setBorder(new CompoundBorder(
-        new LineBorder(BORDER_C, 1, true),
-        new EmptyBorder(10, 14, 10, 14)));
-    toggleRow.setAlignmentX(LEFT_ALIGNMENT);
-
-    JPanel toggleLabels = new JPanel(new GridLayout(2, 1));
-    toggleLabels.setOpaque(false);
-    JLabel tTitle = new JLabel("Sign in as Club Admin");
-    tTitle.setFont(FONT_BOLD);
-    JLabel tSub = new JLabel("Access your public event dashboard");
-    tSub.setFont(new Font("SansSerif", Font.PLAIN, 11));
-    tSub.setForeground(MUTED);
-    toggleLabels.add(tTitle);
-    toggleLabels.add(tSub);
-
-    adminToggle = new JToggleButton("OFF");
-    adminToggle.setFont(new Font("SansSerif", Font.BOLD, 10));
-    adminToggle.setPreferredSize(new Dimension(54, 26));
-    adminToggle.setFocusPainted(false);
-    adminToggle.setBackground(BORDER_C);
-    adminToggle.setForeground(WHITE);
-    adminToggle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    adminToggle.addActionListener(e -> {
-        if (adminToggle.isSelected()) {
-            adminToggle.setText("ON");
-            adminToggle.setBackground(ACCENT);
-            signInBtn.setText("Sign In as Club Admin");
-        } else {
-            adminToggle.setText("OFF");
-            adminToggle.setBackground(BORDER_C);
-            signInBtn.setText("Sign In");
-        }
-    });
-
-    toggleRow.add(toggleLabels, BorderLayout.CENTER);
-    toggleRow.add(adminToggle,  BorderLayout.EAST);
-
-
     JLabel emailLbl = makeLabel("Bilkent Email");
     emailField = new JTextField();
     emailField.setFont(FONT_REG);
@@ -227,8 +188,7 @@ private JPanel buildSignInPanel() {
     emailRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
     emailRow.setAlignmentX(LEFT_ALIGNMENT);
     emailRow.add(emailField, BorderLayout.CENTER);
-    emailRow.add(domainLbl,  BorderLayout.EAST);
-
+    emailRow.add(domainLbl, BorderLayout.EAST);
 
     JLabel passLbl = makeLabel("Password");
     passField = new JPasswordField();
@@ -241,35 +201,25 @@ private JPanel buildSignInPanel() {
     forgotBtn.setContentAreaFilled(false);
     forgotBtn.setBorderPainted(false);
     forgotBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    forgotBtn.setAlignmentX(RIGHT_ALIGNMENT);
-    forgotBtn.addActionListener(e -> {
-        String user = emailField.getText().trim();
-        if (user.isEmpty()) {
-            showMsg("Warning", "Input username.");
-        } else {
-            showMsg("Password Reset", "Reset link was sent:\n" + user + "@ug.bilkent.edu.tr");
-        }
-    });
+    forgotBtn.setAlignmentX(LEFT_ALIGNMENT); // Sola hizalarsan daha düzenli durur
 
     signInBtn = makeButton("Sign In");
-    signInBtn.addActionListener(e -> {
-        String user = emailField.getText().trim();
-        String pass = new String(passField.getPassword());
-        if (user.isEmpty() || pass.isEmpty()) {
-            showMsg("Error", "Please type in all fields.");
-            return;
-        }
-        String role = adminToggle.isSelected() ? "Club Admin" : "Student";
-        showMsg("Enter", "Entering as"+ role + "\n" + user + "@ug.bilkent.edu.tr");
-        
-    });
-
+signInBtn.addActionListener(e -> {
+    String emailPrefix = emailField.getText().trim(); 
+    String fullEmail = emailPrefix + "@ug.bilkent.edu.tr"; 
+    String password = new String(passField.getPassword());
+    User authenticatedUser = SystemController.getInstance().loginUser(fullEmail, password);
+    if (authenticatedUser != null) {
+        this.dispose();
+        new MainFrame(authenticatedUser).setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid email or password!", "Login Error", JOptionPane.ERROR_MESSAGE);
+    }
+});
     panel.add(heading);
     panel.add(Box.createVerticalStrut(4));
     panel.add(sub);
-    panel.add(Box.createVerticalStrut(16));
-    panel.add(toggleRow);
-    panel.add(Box.createVerticalStrut(14));
+    panel.add(Box.createVerticalStrut(20));
     panel.add(emailLbl);
     panel.add(Box.createVerticalStrut(5));
     panel.add(emailRow);
@@ -278,8 +228,9 @@ private JPanel buildSignInPanel() {
     panel.add(Box.createVerticalStrut(5));
     panel.add(passField);
     panel.add(forgotBtn);
-    panel.add(Box.createVerticalStrut(4));
+    panel.add(Box.createVerticalStrut(15));
     panel.add(signInBtn);
+
     return panel;
 }
 
@@ -308,6 +259,10 @@ private JPanel buildRegisterPanel() {
     regEmailField.setFont(FONT_REG);
     styleInput(regEmailField);
 
+    String[] departments = {"CS", "EE", "ME", "IE", "LAW", "ECON", "BA", "ARCH"};
+    JComboBox<String> deptCombo = new JComboBox<>(departments);
+    styleInput(deptCombo);
+
     JLabel domainLbl = new JLabel("@ug.bilkent.edu.tr");
     domainLbl.setFont(new Font("Monospaced", Font.PLAIN, 12));
     domainLbl.setForeground(MUTED);
@@ -334,22 +289,39 @@ private JPanel buildRegisterPanel() {
     regConfirmField.setFont(FONT_REG);
     styleInput(regConfirmField);
 
+    String[] userTypes = {"Student", "Club Admin"};
+    JComboBox<String> typeCombo = new JComboBox<>(userTypes);
+    styleInput(typeCombo);
+
     JButton regBtn = makeButton("Create Account");
-    regBtn.addActionListener(e -> {
-        String name    = regNameField.getText().trim();
-        String user    = regEmailField.getText().trim();
-        String pass    = new String(regPassField.getPassword());
-        String confirm = new String(regConfirmField.getPassword());
-        if (name.isEmpty() || user.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
-            showMsg("Hata", "Please fill in all the fields.");
-            return;
-        }
-        if (!pass.equals(confirm)) {
-            showMsg("Error", "Incorrect Password.");
-            return;
-        }
-        showMsg("Başarılı", "Account Created:\n" + name + " (" + user + "@ug.bilkent.edu.tr)");
-    });
+regBtn.addActionListener(e -> {
+    String name = regNameField.getText().trim();
+    String emailPrefix = regEmailField.getText().trim();
+    String fullEmail = emailPrefix + "@ug.bilkent.edu.tr"; 
+    String selectedDept = (String) deptCombo.getSelectedItem();
+
+    String password = new String(regPassField.getPassword());
+    String confirmPass = new String(regConfirmField.getPassword());
+    int selectedType = typeCombo.getSelectedIndex(); // 0: Student, 1: Club Admin
+
+    if (name.isEmpty() || emailPrefix.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields!", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    if (!password.equals(confirmPass)) {
+        JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    boolean isRegistered = SystemController.getInstance().register(name, fullEmail, password, selectedDept, selectedType);
+
+    if (isRegistered) {
+        JOptionPane.showMessageDialog(this, "Registration Successful! You can now login.");
+        switchToSignIn();
+    } else {
+        JOptionPane.showMessageDialog(this, "Registration Failed! This email might be taken.");
+    }
+});
 
     panel.add(heading);
     panel.add(Box.createVerticalStrut(4));
@@ -370,8 +342,13 @@ private JPanel buildRegisterPanel() {
     panel.add(confirmLbl);
     panel.add(Box.createVerticalStrut(5));
     panel.add(regConfirmField);
+    panel.add(Box.createVerticalStrut(10));
+    panel.add(makeLabel("Account Type"));
+    panel.add(typeCombo);
+    panel.add(Box.createVerticalStrut(5));
+    panel.add(deptCombo); 
     panel.add(Box.createVerticalStrut(14));
-    panel.add(regBtn);
+    panel.add(regBtn); 
     return panel;
 }
 
@@ -383,7 +360,7 @@ private JLabel makeLabel(String text) {
     return lbl;
 }
 
-private void styleInput(JTextField field) {
+private void styleInput(JComponent field) {
     field.setBorder(new CompoundBorder(
         new LineBorder(BORDER_C, 1, true),
         new EmptyBorder(6, 10, 6, 10)));
@@ -416,6 +393,18 @@ private JButton makeButton(String text) {
 
 private void showMsg(String title, String msg) {
     JOptionPane.showMessageDialog(this, msg, title, JOptionPane.INFORMATION_MESSAGE);
+}
+private void switchToSignIn() {
+    
+    styleTab(signInTab, true);
+    styleTab(registerTab, false);
+    cardLayout.show(cardPanel, "signin");
+}
+
+private void switchToRegister() {
+    styleTab(registerTab, true);
+    styleTab(signInTab, false);
+    cardLayout.show(cardPanel, "register");
 }
 
 // ── MAIN ─────────────────────────────────────────────────────

@@ -6,8 +6,8 @@ import java.util.List;
 public class PrivateMeetup extends Event{
     protected int quota;
     protected List<User> invitedUsers;
-    public PrivateMeetup(User host, String title, String location, int quota, String date) {
-        super(host, title, location, date);
+    public PrivateMeetup(User host, String title, String location, String date, int x, int y, int quota) {
+        super(host, title, location, date, x ,y);
         this.quota = quota;
         invitedUsers = new ArrayList<>();
     }

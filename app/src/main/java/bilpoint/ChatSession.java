@@ -43,7 +43,7 @@ public class ChatSession {
     }
 
     public void addMessage(String text, User user) {
-        messages.add(new Message(text, user.getID()));
+        messages.add(new Message( user.getID(), text));
     }
 
     public boolean isExpired() {

@@ -14,6 +14,7 @@ public class SystemController {
         this.users = new ArrayList<>();
         this.events = new ArrayList<>();
         this.activeChats = new ArrayList<>();
+        initSystem();
     }
 
     public static SystemController getInstance() {
@@ -27,15 +28,18 @@ public class SystemController {
         events.add(event);
     }
 
-    public void register(String name, String mail, String password, String department, int type) {
+    public boolean register(String name, String mail, String password, String department, int type) {
         User newUser;
         if (type == 0) {
             newUser = new Student(name, mail, password, password);
             users.add(newUser);
+            return true;
         } else if (type == 1) {
-            newUser = new ClubAdmin(name, mail, password, name, "a");
+            newUser = new ClubAdmin(name, mail, password, name, "a", department);
             users.add(newUser);
+            return true;
         }
+        return false;
     }
 
     public User loginUser(String mail, String password) {
@@ -48,13 +52,13 @@ public class SystemController {
     }
 
     public void initSystem() {
-        User s1 = new Student("Yiğit", "yigit@bilkent.edu.tr", "123", "CS");
+        User s1 = new Student("Mehmet Yiğit Çakır", "yigit@ug.bilkent.edu.tr", "123", "CS");
         User s2 = new Student("Nazim", "nazim@bilkent.edu.tr", "5423", "EE");
-        User admin = new ClubAdmin("Furkan ", "music@bilkent.edu.tr", "456", "Music", "AUTH123");
+        User admin = new ClubAdmin("Furkan ", "music@ug.bilkent.edu.tr", "456", "Music", "AUTH123", "LAW");
         this.users.add(s1);
         this.users.add(s2);
         this.users.add(admin);
-        this.events.add(new PublicEvent(admin, "Concert", "Center Campus", 60, "02.03.2026"));
+        this.events.add(new PublicEvent(admin, "Concert", "Center Campus", "02.03.2026", 15, 20, 60));
     }
 
     public boolean removeEvent(User requester, Event event) {

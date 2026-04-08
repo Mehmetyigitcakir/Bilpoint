@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends User {
-
-    private String department;
     private List<Student> friends;
 
     public Student(String name, String mail, String password, String department) {
-        super(name, mail, password);
+        super(name, mail, password, department);
         this.ID = "STD-" + java.util.UUID.randomUUID().toString().substring(0, 8);
-        this.department = department;
         friends = new ArrayList<Student>();
     }
 

@@ -10,7 +10,7 @@ public class CoinFlip extends Minigame {
     private boolean headsSelector;
     
 
-    public CoinFlip( String challengerId, String optionOne, String optionTwo){
+    public CoinFlip(String challengerId, String optionOne, String optionTwo){
         super(challengerId);
         this.optionOne = optionOne;
         this.optionTwo = optionTwo;
