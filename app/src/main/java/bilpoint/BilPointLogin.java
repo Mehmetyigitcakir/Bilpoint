@@ -201,7 +201,7 @@ private JPanel buildSignInPanel() {
     forgotBtn.setContentAreaFilled(false);
     forgotBtn.setBorderPainted(false);
     forgotBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    forgotBtn.setAlignmentX(LEFT_ALIGNMENT); // Sola hizalarsan daha düzenli durur
+    forgotBtn.setAlignmentX(LEFT_ALIGNMENT);
 
     signInBtn = makeButton("Sign In");
 signInBtn.addActionListener(e -> {

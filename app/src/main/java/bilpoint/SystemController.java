@@ -31,7 +31,7 @@ public class SystemController {
     public boolean register(String name, String mail, String password, String department, int type) {
         User newUser;
         if (type == 0) {
-            newUser = new Student(name, mail, password, password);
+            newUser = new Student(name, mail, password, department);
             users.add(newUser);
             return true;
         } else if (type == 1) {

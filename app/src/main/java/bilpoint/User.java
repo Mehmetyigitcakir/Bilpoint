@@ -14,9 +14,11 @@ public abstract class User {
     protected String department;
     protected List<Notification> notifications;
     protected List<Event> joinedEvents;
+    protected List<User> friends;
 
     public User(String name, String mail, String password, String department) {
         this.name = name;
+        this.friends = new ArrayList<>();
         this.department = department;
         this.location = "";
         this.ID = "USR-" + java.util.UUID.randomUUID().toString().substring(0, 8);
@@ -33,6 +35,32 @@ public abstract class User {
             return true;
         }
         return false;
+    }
+        public void sendFriendRequest(User s) {
+        if (s == null|| s.equals(this))
+            return;
+        String message = this.getName() + " sent you a friend request.";
+        s.getNotifications().add(new Notification(message));
+    }
+
+    public void acceptFriend(User friend){
+       if (!friends.contains(friend)) {
+         friend.getNotifications().add(new Notification(this.name + " has accepted your friend request."));
+            this.friends.add(friend);
+            friend.getFriends().add(this); 
+        } 
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+    public void addFriends(User frnd) {
+        friends.add(frnd);
+    }
+    public List<User> getFriends() {
+        return friends;
     }
 
     public void joinEvent(Event event) {

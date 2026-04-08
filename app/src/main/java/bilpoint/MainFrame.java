@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
         
         sidebar = new SideBarPanel(this, user);
         mapView = new MapViewPanel(user, this);
-        friendsGroupsPanel = new FriendsGroupsPanel();
+        friendsGroupsPanel = new FriendsGroupsPanel(this);
         notificationPoolPanel = new NotificationPoolPanel();
 
         
@@ -50,6 +50,21 @@ public class MainFrame extends JFrame {
         ChatPanel chatPanel = new ChatPanel(event.getChatSession(), currentUser, event, this);
         contentArea.add(chatPanel, "CHAT_VIEW");
         cardLayout.show(contentArea, "CHAT_VIEW");
+    }
+
+    public void switchToProfile(){
+      UserProfilePanel userProfile = new UserProfilePanel(this, currentUser);  
+      contentArea.add(userProfile, "PROFILE_VIEW");
+      cardLayout.show(contentArea, "PROFILE_VIEW");
+      contentArea.revalidate();
+      contentArea.repaint();
+    }
+    public void switchToAccount(){
+      AccountProfile userProfile = new AccountProfile(this, currentUser);  
+      contentArea.add(userProfile, "PROFILE_VIEW");
+      cardLayout.show(contentArea, "PROFILE_VIEW");
+      contentArea.revalidate();
+      contentArea.repaint();
     }
 
     public void switchToMap() {

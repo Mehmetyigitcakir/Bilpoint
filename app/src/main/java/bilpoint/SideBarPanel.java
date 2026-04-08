@@ -1,26 +1,28 @@
 package bilpoint;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.swing.border.LineBorder;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+//import org.w3c.dom.events.MouseEvent;
 
 public class SideBarPanel extends JPanel {
     private MainFrame parent;
     private User currentUser;
     private List<JButton> navButtons;  
+    JLabel nameLabel;
 
     public SideBarPanel(MainFrame parent, User currentUser) {
         this.parent = parent;
@@ -35,27 +37,41 @@ public class SideBarPanel extends JPanel {
         JPanel profileContainer = new JPanel();
         profileContainer.setOpaque(false);
         profileContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 25));
-        profileContainer.setPreferredSize(new Dimension(260, 120));
+        profileContainer.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
 
-        ImageIcon avatarIcon = new ImageIcon("assets_bilpoint/avatar.png");
-        Image scaledAvatar = avatarIcon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-        JLabel avatarLabel = new JLabel(new ImageIcon(scaledAvatar));
-        avatarLabel.setPreferredSize(new Dimension(60, 60));
-        
+        ImageIcon avatarIcon =  new ImageIcon("assets_bilpoint/avatar.png");
+        JLabel avatarLabel;
+        if (avatarIcon != null) {
+            Image scaledAvatar = avatarIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            avatarLabel = new JLabel(new ImageIcon(scaledAvatar));
+        } else {
+            avatarLabel = new JLabel("👤");
+            avatarLabel.setFont(new Font("SansSerif", Font.PLAIN, 40));
+        }
+
         JPanel textInfo = new JPanel(new GridLayout(2, 1));
         textInfo.setOpaque(false);
         
-        JLabel nameLabel = new JLabel(currentUser.getName());
+        nameLabel = new JLabel(currentUser.getName());
         nameLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
         
-        JLabel deptLabel = new JLabel(currentUser.getDepartment() + " Dept");
+        JLabel deptLabel = new JLabel( currentUser.getDepartment() + " Dept");
         deptLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
         deptLabel.setForeground(Color.GRAY);
 
         textInfo.add(nameLabel);
         textInfo.add(deptLabel);
+
         profileContainer.add(avatarLabel);
         profileContainer.add(textInfo);
+
+        profileContainer.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                parent.switchView("PROFILE_VIEW");
+                parent.switchToAccount();
+            }
+        });
 
         JPanel navPanel = new JPanel();
         navPanel.setOpaque(false);
@@ -106,7 +122,6 @@ public class SideBarPanel extends JPanel {
             btn.setBackground(Color.WHITE); 
             btn.setForeground(new Color(100, 110, 130));
         }
-        // Sadece tıklananı mavi yap
         clickedBtn.setBackground(new Color(230, 240, 255));
         clickedBtn.setForeground(new Color(25, 42, 86));
     }
@@ -132,4 +147,8 @@ public class SideBarPanel extends JPanel {
         
         return btn;
     }
+    public void setNameLabel(String name) {
+        nameLabel = new JLabel(currentUser.getName());
+    }
+    
 }

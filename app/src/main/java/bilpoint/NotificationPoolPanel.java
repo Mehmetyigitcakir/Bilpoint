@@ -164,9 +164,11 @@ public class NotificationPoolPanel extends JPanel {
 
         JButton leftBtn = new JButton(leftButtonText);
         styleLightButton(leftBtn);
+        leftBtn.addActionListener(e -> { card.setVisible(false);  });
 
         JButton rightBtn = new JButton(rightButtonText);
-        styleDarkButton(rightBtn);
+        styleDarkButton(rightBtn);//
+        rightBtn.addActionListener(e -> { card.setVisible(false);  });
 
         buttonPanel.add(leftBtn);
         buttonPanel.add(rightBtn);

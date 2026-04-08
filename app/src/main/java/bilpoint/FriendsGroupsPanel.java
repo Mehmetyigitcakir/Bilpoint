@@ -21,7 +21,10 @@ import javax.swing.border.LineBorder;
 
 public class FriendsGroupsPanel extends JPanel {
 
-    public FriendsGroupsPanel() {
+    private MainFrame mainFrame;
+
+    public FriendsGroupsPanel(MainFrame m) {
+        this.mainFrame = m;
         setLayout(new BorderLayout());
         setBackground(new Color(248, 250, 252));
         setBorder(BorderFactory.createEmptyBorder(25, 30, 25, 30));
@@ -76,8 +79,7 @@ public class FriendsGroupsPanel extends JPanel {
         JPanel friendsPanel = new JPanel(new GridLayout(1, 2, 15, 0));
         friendsPanel.setOpaque(false);
         friendsPanel.add(createFriendCard("Efe Öksüz", "CS Department", "5 mutual friends"));
-        friendsPanel.add(createFriendCard("Arda Kaya", "IE Department", "3 mutual friends"));
-
+        
         content.add(friendsPanel);
         content.add(Box.createVerticalStrut(30));
 
@@ -154,8 +156,12 @@ public class FriendsGroupsPanel extends JPanel {
 
         JButton profileBtn = new JButton("View Profile");
         styleLightButton(profileBtn);
+        profileBtn.addActionListener(e -> {
+        mainFrame.switchToProfile();
+    });
 
         JButton requestBtn = new JButton("Send Request");
+        requestBtn.addActionListener(e -> { card.setVisible(false);  });
         styleDarkButton(requestBtn);
 
         buttonPanel.add(profileBtn);

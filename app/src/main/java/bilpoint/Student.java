@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends User {
-    private List<Student> friends;
 
     public Student(String name, String mail, String password, String department) {
         super(name, mail, password, department);
         this.ID = "STD-" + java.util.UUID.randomUUID().toString().substring(0, 8);
-        friends = new ArrayList<Student>();
     }
 
     public void sendFriendRequest(Student s) {
@@ -26,11 +24,12 @@ public class Student extends User {
             friend.getFriends().add(this); 
         } 
     }
+    public void addFriends(Student frnd) {
+        friends.add(frnd);
+    }
 
     public String getDepartment() {
         return department;
     }
-    public List<Student> getFriends() {
-        return friends;
-    }
+ 
 }
